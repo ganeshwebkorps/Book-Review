@@ -3,8 +3,13 @@ class ReviewsController < ApplicationController
     @reviews = Review.all
   end
 
+  def all
+    @reviews = Review.where(book_id: params[:id])
+  end
+
   def new
     @review = Review.new
+    @book = Book.find(params[:id])
   end
 
   def edit
@@ -13,13 +18,15 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @id = @review.book_id
+    @book = @review.book
   end
   
   def create
     @review = Review.new(reviews_params)
     @review.reviewer_id = current_user.id
     if @review.save
-      redirect_to reviews_path, notice: 'Review was successfully created'
+      redirect_to review_path(@review), notice: 'Review was successfully created'
     else
       render json: @review.errors, status: :unprocessable_entity  
     end 
@@ -28,7 +35,7 @@ class ReviewsController < ApplicationController
   def update
       @review = Review.find(params[:id])
     if @review.update(reviews_params)
-      redirect_to Review_path, notice: 'Review was successfully updated'
+      redirect_to review_path(@review), notice: 'Review was successfully updated'
     else
       render :action => 'edit'
     end
@@ -43,6 +50,6 @@ class ReviewsController < ApplicationController
 
   private
     def reviews_params
-      params.require(:Review).permit(:book_id, :discription)
+      params.require(:review).permit(:book_id, :discription)
     end  
 end

@@ -4,6 +4,10 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def book
+     @books = current_user.books
+  end
+
   def new
     @book = Book.new
   end
@@ -20,7 +24,7 @@ class BooksController < ApplicationController
     @book = Book.new(books_params)
     @book.writer_id = current_user.id
     if @book.save
-      redirect_to books_path, notice: 'Book was successfully created'
+      redirect_to your_books_path, notice: 'Book was successfully created'
     else
       render json: @book.errors, status: :unprocessable_entity  
     end 

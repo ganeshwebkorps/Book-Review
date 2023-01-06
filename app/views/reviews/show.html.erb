@@ -1,16 +1,15 @@
-<div class="card">
+<div class="card m-2">
     <h2 class="card-header">review Details</h2>
     <div class="card-body">
         <h5 class="card-title"> Review :<%= @review.discription %></h5>
-        <h5 class="card-text"> Book ID :<%= @review.book.id%></h5>
-
-            <%= link_to 'Back', reviews_path, class:"btn btn-primary" %>
-
-        <%# <% if current_user.type == "Reviewer" %>
-            <%# <%= link_to 'Review', new_review_path(para[:id]), class:"btn btn-info"%>  
-        <%# <% else %> 
-            <%# <%= link_to 'View Reviews', reviews_path, class:"btn btn-info" %>    
-        <%# <% end %> 
+        <h5 class="card-text"> Book Name :<%= @book.book_name%></h5>
+        <h5 class="card-text"> Book Category :<%= @book.category%></h5>
+        <h5 class="card-text"> Book ID :<%= @review.book_id%></h5>
+        
+        
+        
+            <%= link_to 'Back', all_reviews_path(@id), class:"btn btn-primary" %>
+        
     </div>
     
 </div>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'reviews/new/:id', to: 'reviews#new', as: :new_reviews
+  get 'reviews/all/:id', to: 'reviews#all', as: :all_reviews
+  get 'books/book', to: 'books#book', as: :your_books
   resources :books
-  resources :reviews, except:[:new]
+  resources :reviews, except:[:new, :index]
   
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'
