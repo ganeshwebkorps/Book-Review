@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
-  get 'reviews/new/:id', to: 'reviews#new', as: :new_reviews
-  get 'reviews/all/:id', to: 'reviews#all', as: :all_reviews
-  get 'books/book', to: 'books#book', as: :your_books
-  resources :books
-  resources :reviews, except:[:new, :index]
+ 
+  resources :books do
+      collection do
+        get 'book', to: 'books#book', as: :your_books
+      end
+    end
+  
+  resources :reviews, except:[:new, :index] do
+    member do
+      get 'new/:id', to: 'reviews#new', as: :new_reviews
+      get 'all/:id', to: 'reviews#all', as: :all_reviews
+    end
+  end
+
+  resources :likes, only: [:create, :destroy]
   
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'

@@ -1,17 +1,46 @@
-<div class="card m-2">
-    <h2 class="card-header">review Details</h2>
-    <div class="card-body">
-        <h5 class="card-title"> Review :<%= @review.discription %></h5>
-        <h5 class="card-text"> Book Name :<%= @book.book_name%></h5>
-        <h5 class="card-text"> Book Category :<%= @book.category%></h5>
-        <h5 class="card-text"> Book ID :<%= @review.book_id%></h5>
-        
-        
-        
-            <%= link_to 'Back', all_reviews_path(@id), class:"btn btn-primary" %>
-        
+
+
+
+
+<div class= "row">
+    <div class="card mt-3 ms-3" style="width: 30rem;">
+        <div class="card-body row">
+            <h5 class="card-title"> Review :<%= @review.discription %></h5>
+            <h5 class="card-text"> Book Name :<%= @book.book_name%></h5>
+            <h5 class="card-text"> Book Category :<%= @book.category%></h5>
+            <h5 class="card-text"> Book ID :<%= @review.book_id%></h5>
+            <h5 class="card-text"> Author :<%= @book.writer.name%></h5>
+            <h5 class="card-text"> Reviewer  :<%= @review.reviewer.name%></h5>
+
+            <div class="row">
+                <% like = current_user.likes.find_by(likeable: @review)%>
+                <% if like.nil? %>
+                    <h5 class="text-secondary"> <%= @review.likes.count %> likes</h5>
+                    <form action="/likes" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%form_authenticity_token%>">
+                    <input type="hidden" name="like[likeable_id]" value="<%= @review.id %>">
+                    <input type="hidden" name="like[likeable_type]" value="Review">
+                    <input type="submit" value="  <%= @review.likes.count %> Like" class="btn btn-outline-primary">
+                    </form>
+                <% else %>
+                    <h5 class="text-primary"><%= @review.likes.count %> likes</h5>
+                    <form action="<%= like_path(like) %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%form_authenticity_token%>">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value=" UnLike"class="btn  btn-sm btn-outline-primary">
+                    </form>
+                <% end %>
+            </div>
+
+            
+            <%= link_to 'Back',  all_reviews_review_path(@id), class:"btn btn-outline-secondary" %>
+            
+        </div>
     </div>
-    
 </div>
+
+
+
+
 
 

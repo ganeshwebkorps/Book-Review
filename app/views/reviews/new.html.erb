@@ -1,4 +1,7 @@
- 
+
+
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
 <%= form_with model: @review do |f| %>
     <div class="form-group mb-3">
         <%= f.hidden_field :book_id, value: params[:id], class:"form-control" %>
@@ -10,8 +13,11 @@
     </div>
            
     <div class="form-group mb-3">
-      <%= f.submit class:"btn btn-success btn-lg" %>
-      <%= link_to 'Back', book_path(@book), class:"btn btn-lg btn-secondary" %>
+      <%= f.submit class:"btn btn-outline-success btn-sm" %>
+      <%= link_to 'Back', book_path(@book), class:"btn btn-sm btn-outline-secondary" %>
     </div>
 
 <% end %>
+
+  </div>
+</div>

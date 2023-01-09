@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_03_214218) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_150453) do
   create_table "books", force: :cascade do |t|
     t.string "book_name"
     t.string "category"
@@ -22,9 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_214218) do
   create_table "likes", force: :cascade do |t|
     t.integer "total_like"
     t.integer "likeable_id"
-    t.string "likeable_type"
+    t.string "likeable_type" 
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["likeable_id", "likeable_type"], name: "index_likes_on_likeable_id_and_likeable_type"
+    t.index ["user_id", "likeable_id", "likeable_type"], name: "index_likes_on_user_id_and_likeable_id_and_likeable_type", unique: true
   end
 
   create_table "reviews", force: :cascade do |t|
