@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to review_path(@review), notice: 'Review was successfully created'
     else
-      render json: @review.errors, status: :unprocessable_entity  
+      render :new, status: :unprocessable_entity  
     end 
   end
 

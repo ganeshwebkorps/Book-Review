@@ -26,7 +26,8 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to your_books_books_path, notice: 'Book was successfully created'
     else
-      render json: @book.errors, status: :unprocessable_entity  
+      # render json: @book.errors, status: :unprocessable_entity  
+      render :new, status: :unprocessable_entity
     end 
   end
 

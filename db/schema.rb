@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_150453) do
   create_table "likes", force: :cascade do |t|
     t.integer "total_like"
     t.integer "likeable_id"
-    t.string "likeable_type" 
+    t.string "likeable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
